@@ -667,6 +667,11 @@ window.Radzen = {
     } 
 
     popup.style.display = 'block';
+    popup.classList.remove('rz-close')
+    popup.classList.add('rz-open');
+    popup.onanimationend = function() {
+        popup.classList.remove('rz-open');
+    }
 
     var rect = popup.getBoundingClientRect();
 
@@ -792,7 +797,11 @@ window.Radzen = {
       if (popup.minWidth) {
           popup.style.minWidth = '';
       }
-      popup.style.display = 'none';
+      popup.classList.add('rz-close')
+      popup.onanimationend = function() {
+          popup.style.display = 'none';
+          popup.classList.remove('rz-close')
+      }
     }
     document.removeEventListener('mousedown', Radzen[id]);
     window.removeEventListener('resize', Radzen[id]);
